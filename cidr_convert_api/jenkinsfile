@@ -1,20 +1,21 @@
 pipeline {
-    agent any 
+    agent any
+
     stages {
-        stage('Build') { 
+        stage('Checkout') {
             steps {
-                echo "Prueba asdfghjkl"
+                checkout([$class: 'GitSCM', branches: [[name: '*/Project']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/tamygutz/DOTT.git']]])
             }
         }
-        stage('Test') { 
+        stage('Build') {
             steps {
-                echo "Prueba 4"
+                git branch: 'Project', url: 'https://github.com/tamygutz/DOTT.git'
             }
         }
-        stage('Deploy') { 
+        stage('Test') {
             steps {
-                echo "Prueba 3" 
+                echo "The job have been tested"
             }
         }
-    }
+        }
 }
