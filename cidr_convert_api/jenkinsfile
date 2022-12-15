@@ -14,8 +14,18 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                echo "Se está tratando de analizar el código"
+                withSonarQubeEnv (installationName: 'SonarCloud') {
+                    sh ''' ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.organization=tamygutz \
+                            -Dsonar.projectKey=tamygutz_DOTT \
+                            -Dsonar.sources=./cidr_convert_api/python/ \
+                            -Dsonar.host.url=https://sonarcloud.io   '''
+                }
             }
-        }
+        dir("cidr_convert_api/python/");
+        withSonarQubeEnv('SonarCloud') {
+        sh ${scannerHome}/bin/sonar-scanner"
+    }
+  }
         }
 }
