@@ -14,9 +14,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                {
-                sh "${scannerHome}/bin/sonar-scanner"
-                }
+                echo "Se está tratando de analizar el código"
             }
         }
         }
