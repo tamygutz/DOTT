@@ -15,7 +15,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv (installationName: 'SonarCloud') {
-                    sh ''' ${scannerHome}/bin/sonar-scanner \
+                    sh ''' SonarCloud/bin/sonar-scanner \
                             -Dsonar.organization=tamygutz \
                             -Dsonar.projectKey=tamygutz_DOTT \
                             -Dsonar.sources=./cidr_convert_api/python/ \
@@ -25,3 +25,4 @@ pipeline {
         }
     }
 }
+
