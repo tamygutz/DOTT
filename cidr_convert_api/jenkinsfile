@@ -12,9 +12,12 @@ pipeline {
                 git branch: 'Project', url: 'https://github.com/tamygutz/DOTT.git'
             }
         }
-        stage('Test') {
+        stage('SonarQube Analysis') {
             steps {
-                echo "The job have been tested"
+                def scannerHome = tool 'SonarScanner';
+                withSonarQubeEnv() {
+                sh "${scannerHome}/bin/sonar-scanner"
+                }
             }
         }
         }
