@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/Project']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/tamygutz/DOTT.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/tamygutz/DOTT.git']]])
             }
         }
         stage('Build') {
             steps {
-                git branch: 'Project', url: 'https://github.com/tamygutz/DOTT.git'
+                git branch: 'master', url: 'https://github.com/tamygutz/DOTT.git'
             }
         }
         stage('SonarQube Analysis') {
