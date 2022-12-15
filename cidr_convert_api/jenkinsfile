@@ -22,10 +22,7 @@ pipeline {
                             -Dsonar.host.url=https://sonarcloud.io   '''
                 }
             }
-        dir("cidr_convert_api/python/");
-        withSonarQubeEnv('SonarCloud') {
-        sh ${scannerHome}/bin/sonar-scanner"
-    }
-  }
         }
+    }
 }
+
