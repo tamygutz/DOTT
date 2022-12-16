@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    environment {
-        SCANNER_HOME 'SonarQubeScanner'
-    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -15,6 +13,9 @@ pipeline {
             }
         }
         stage('SonarCloud Analysis') {
+            environment {
+                SCANNER_HOME= 'SonarQubeScanner'
+            }
             steps {
                 script {
                     withSonarQubeEnv ('SonarCloud') {
