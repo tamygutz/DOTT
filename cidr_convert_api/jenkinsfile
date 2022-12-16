@@ -13,9 +13,6 @@ pipeline {
             }
         }
         stage('SonarCloud Analysis') {
-            environment {
-                SCANNER_HOME= tool 'sonar-scanner'
-            }
             steps {
                 script {
                     withSonarQubeEnv ('SonarCloud') {
