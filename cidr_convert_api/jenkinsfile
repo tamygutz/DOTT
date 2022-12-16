@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        SCANNER_HOME - tool 'SonarQubeScanner'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -12,17 +14,18 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/tamygutz/DOTT.git'
             }
         }
-        stage('SonarQube Analysis') {
+        stage('SonarCloud Analysis') {
             steps {
-                withSonarQubeEnv (installationName: 'SonarCloud') {
-                    sh ''' SonarCloud/bin/sonar-scanner \
+                script {
+                    withSonarQubeEnv ('SonarCloud') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner \
                             -Dsonar.organization=tamygutz \
                             -Dsonar.projectKey=tamygutz_DOTT \
                             -Dsonar.sources=./cidr_convert_api/python/ \
                             -Dsonar.host.url=https://sonarcloud.io   '''
+                    }
                 }
             }
         }
     }
 }
-
