@@ -14,12 +14,12 @@ pipeline {
         }
         stage('SonarCloud Analysis') {
             environment {
-                SCANNER_HOME= 'SonarQubeScanner'
+                SCANNER_HOME= tool 'SonarQubeScanner'
             }
             steps {
                 script {
                     withSonarQubeEnv ('SonarCloud') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner \
+                    sh ''' ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.organization=tamygutz \
                             -Dsonar.projectKey=tamygutz_DOTT \
                             -Dsonar.sources=./cidr_convert_api/python/ \
