@@ -16,11 +16,11 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv ('SonarCloud') {
-                    sh ''' ${scannerHome}/opt/sonar-scanner \
-                            -Dsonar.organization=tamygutz \
-                            -Dsonar.projectKey=tamygutz_DOTT \
-                            -Dsonar.sources=./cidr_convert_api/python/ \
-                            -Dsonar.host.url=https://sonarcloud.io   '''
+                        sonar-scanner.bat \
+                            -D"sonar.organization=tamygutz" \
+                            -D"sonar.projectKey=tamygutz_DOTT" \
+                            -D"sonar.sources=./cidr_convert_api/" \
+                            -D"sonar.host.url=https://sonarcloud.io"
                     }
                 }
             }
